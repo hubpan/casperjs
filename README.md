@@ -5,8 +5,9 @@ __NOTE__: This is a fork of CasperJS for my own need.
 This fork contains the following features and fixes:
 
 - __[Feature]__ selectByLink: enhanced selectByXpath and relevant only if you're converting a selenium script.
-- __[Feature]__ selectByName: to select <input> elements if such elements don't have "id" attribute but instead only "name" attribute
-- __[BugFix]__ PhantomJS does not support relative URL but somehow there's a Heisenberg lurking around
+- __[Feature]__ selectByName: to select <input> elements if such elements don't have "id" attribute but instead only "name" attribute.
+- __[Feature]__ Filling individual form element (<input>) (versus CasperJS that prefers to fill the form in one-shot).
+- __[BugFix]__ PhantomJS does not support relative URL but somehow there's a Heisenberg lurking around.
 
 CasperJS is a navigation scripting & testing utility for [PhantomJS](http://www.phantomjs.org/).
 It eases the process of defining a full navigation scenario and provides useful
