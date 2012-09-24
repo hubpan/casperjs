@@ -212,7 +212,7 @@
                 if (!vals.hasOwnProperty(name)) {
                     continue;
                 }
-                var field = this.findAll('[name="' + name + '"]', form);
+                var field = form instanceof HTMLInputElement || form instanceof HTMLTextAreaElement ? form : this.findAll('[name="' + name + '"]', form);
                 var value = vals[name];
                 if (!field) {
                     out.errors.push('no field named "' + name + '" in form');
