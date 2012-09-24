@@ -53,7 +53,7 @@
             -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
             41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1
         );
-        var SUPPORTED_SELECTOR_TYPES = ['css', 'xpath'];
+        var SUPPORTED_SELECTOR_TYPES = ['css', 'xpath', 'name'];
 
         // public members
         this.options = options || {};
@@ -248,7 +248,9 @@
                 var pSelector = this.processSelector(selector);
                 if (pSelector.type === 'xpath') {
                     return this.getElementsByXPath(pSelector.path);
-                } else {
+                } else if (pSelector.type === 'name') {
+                    return scope.getElementsByName(pSelector.path);
+                else {
                     return scope.querySelectorAll(pSelector.path);
                 }
             } catch (e) {
@@ -269,6 +271,8 @@
                 var pSelector = this.processSelector(selector);
                 if (pSelector.type === 'xpath') {
                     return this.getElementByXPath(pSelector.path);
+                } else if (pSelector.type === 'name') {
+                    return scope.getElementsByName(pSelector.path)[0];
                 } else {
                     return scope.querySelector(pSelector.path);
                 }
@@ -417,6 +421,22 @@
          */
         this.mouseEvent = function mouseEvent(type, selector) {
             var elem = this.findOne(selector);
+             
+            // Work-around because PhantomJS doesn't support relative URL
+
+            if (type === 'click') {
+                for( var element = elem; element != null; element = element.parentNode) {
+                    if (element instanceof HTMLAnchorElement) {
+                        elem = element;
+                        break;
+                    }
+                }
+            }
+
+            if (elem instanceof HTMLAnchorElement) {
+                elem.href = elem.href; // HEISENBUG
+            }
+
             if (!elem) {
                 this.log("mouseEvent(): Couldn't find any element matching '" + selector + "' selector", "error");
                 return false;

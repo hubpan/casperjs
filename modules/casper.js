@@ -68,6 +68,48 @@ function selectXPath(expression) {
 exports.selectXPath = selectXPath;
 
 /**
+ * Shortcut to build a selector based on "name" attribute.
+ * <p>
+ * This shortcut is useful to deal with form <input> element
+ * that may or may not have the "id" attribute but have the 
+ * "name" attribute.
+ * </p>
+ * 
+ * @param name
+ * @returns selector
+ */
+function selectByName(name) {
+    "use strict";
+    return {
+        type : 'name',
+        path : name,
+        toString : function() {
+            return this.type + ' name: ' + this.path;
+        }
+    };
+}
+exports.selectByName = selectByName;
+
+/**
+ * Shortcut to build a selector based on "link", typically produced 
+ * by the Selenium script. <br />
+ * 
+ * This function is an extension of the XPath selector.
+ * @param link
+ * @param tag
+ *            (optional)
+ * @returns selector
+ */
+function selectByLink(link, tag) {
+    "use strict";
+    tag = tag || "*";
+    var escapedLink = link.toString().replace(/"/g, '\\"');
+    var selector = selectXPath(f('//%s[text()="%s"]', tag, escapedLink));
+    return selector;
+}
+exports.selectByLink = selectByLink;
+
+/**
  * Main Casper object.
  *
  * @param  Object  options  Casper options
