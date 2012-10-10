@@ -810,6 +810,22 @@ Casper.prototype.getElementBounds = function getElementBounds(selector) {
 };
 
 /**
+ * Retrieves boundaries for all the DOM elements matching the provided DOM CSS3/XPath selector.
+ *
+ * @param  String  selector  A DOM CSS3/XPath selector
+ * @return Array
+ */
+Casper.prototype.getElementsBounds = function getElementBounds(selector) {
+    "use strict";
+    if (!this.exists(selector)) {
+        throw new CasperError("No element matching selector found: " + selector);
+    }
+    return this.evaluate(function _evaluate(selector) {
+        return window.__utils__.getElementsBounds(selector);
+    }, { selector: selector });
+};
+
+/**
  * Retrieves global variable.
  *
  * @param  String  name  The name of the global variable to retrieve
@@ -1235,6 +1251,22 @@ Casper.prototype.start = function start(location, then) {
 };
 
 /**
+ * Returns the current status of current instance
+ *
+ * @param  Boolean  asString  Export status object as string
+ * @return Object
+ */
+Casper.prototype.status = function status(asString) {
+    var properties = ['currentHTTPStatus', 'defaultWaitTimeout', 'loadInProgress', 'navigationRequested',
+                      'options', 'pendingWait', 'requestUrl', 'started', 'step', 'url'];
+    var currentStatus = {};
+    properties.forEach(function(property) {
+        currentStatus[property] = this[property];
+    }.bind(this));
+    return asString === true ? utils.dump(currentStatus) : currentStatus;
+};
+
+/**
  * Schedules the next step in the navigation process.
  *
  * @param  function  step  A function to be called as a step
@@ -1343,6 +1375,15 @@ Casper.prototype.thenOpen = function thenOpen(location, settings, then) {
 Casper.prototype.thenOpenAndEvaluate = function thenOpenAndEvaluate(location, fn, context) {
     "use strict";
     return this.thenOpen(location).thenEvaluate(fn, context);
+};
+
+/**
+ * Returns a string representation of current instance
+ *
+ * @return String
+ */
+Casper.prototype.toString = function toString() {
+    return '[object Casper], currently at ' + this.getCurrentUrl();
 };
 
 /**
