@@ -1,3 +1,5 @@
+/*global casper*/
+/*jshint strict:false*/
 casper.test.comment("page.error event");
 
 var error = {};
@@ -15,5 +17,5 @@ casper.thenOpen('tests/site/error.html', function() {
 });
 
 casper.run(function() {
-    this.test.done();
+    this.test.done(2);
 });

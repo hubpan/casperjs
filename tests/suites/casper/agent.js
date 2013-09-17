@@ -1,3 +1,5 @@
+/*global casper*/
+/*jshint strict:false*/
 function testUA(ua, match) {
     casper.test.assertMatch(
         ua, match, 'Default user agent matches ' + match
@@ -20,5 +22,5 @@ casper.thenOpen('tests/site/index.html');
 
 casper.run(function() {
     this.removeListener('resource.requested', fetchUA);
-    this.test.done();
+    this.test.done(3);
 });

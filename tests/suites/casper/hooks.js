@@ -1,3 +1,5 @@
+/*global casper*/
+/*jshint strict:false*/
 // Dear curious test reader,
 // The on* family of methods is considered deprecated since 0.6.0; please use events instead
 
@@ -37,5 +39,5 @@ casper.then(function() {
 
 casper.run(function() {
     this.options.onAlert = null;
-    this.test.done();
+    this.test.done(5);
 });

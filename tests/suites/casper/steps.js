@@ -1,10 +1,12 @@
+/*global casper*/
+/*jshint strict:false*/
 casper.test.comment('Casper.then()');
 
 casper.start('tests/site/index.html');
 
 var nsteps = casper.steps.length;
 
-casper.then(function(self) {
+casper.then(function(response) {
     this.test.assertTitle('CasperJS test index', 'Casper.then() added a new step');
 });
 
@@ -28,5 +30,5 @@ casper.each([1, 2, 3], function(self, item, i) {
 });
 
 casper.run(function() {
-    this.test.done();
+    this.test.done(8);
 });

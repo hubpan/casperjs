@@ -1,3 +1,5 @@
+/*global casper*/
+/*jshint strict:false maxstatements:99*/
 casper.start('tests/site/mouse-events.html');
 
 casper.then(function() {
@@ -23,5 +25,5 @@ casper.then(function() {
 });
 
 casper.run(function() {
-    this.test.done();
+    this.test.done(16);
 });

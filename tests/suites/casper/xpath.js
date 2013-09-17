@@ -1,3 +1,5 @@
+/*global casper __utils__*/
+/*jshint strict:false*/
 var x = require('casper').selectXPath;
 
 casper.test.comment('XPath');
@@ -28,5 +30,5 @@ casper.thenClick(x('/html/body/a[2]'), function() {
 });
 
 casper.run(function() {
-    this.test.done();
+    this.test.done(6);
 });

@@ -1,3 +1,5 @@
+/*global casper*/
+/*jshint strict:false*/
 casper.test.comment('Casper.fetchText()');
 
 casper.start('tests/site/index.html', function() {
@@ -5,5 +7,5 @@ casper.start('tests/site/index.html', function() {
 });
 
 casper.run(function() {
-    this.test.done();
+    this.test.done(1);
 });
