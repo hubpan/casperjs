@@ -6,23 +6,16 @@
     "phantomjs",
     "javascript"
   ],
-  "maintainers": [
-    {
-      "name": "Nicolas Perriault",
-      "email": "nperriault@gmail.com",
-      "web": "http://www.akei.com"
-    }
-  ],
   "dependencies": {
-    "http://www.phantomjs.org/": "1.7"
+    "phantomjs": "1.9.x"
   },
   "bugs": {
     "url": "https://github.com/n1k0/casperjs/issues"
   },
-  "repositories": [
+  "repository": [
     {
       "type": "git",
-      "url": "git://github.com/n1k0/casperjs.git"
+      "url": "git://github.com/hubpan/casperjs.git"
     }
   ],
   "licenses": [
@@ -30,6 +23,5 @@
       "name": "MIT",
       "url": "http://www.opensource.org/licenses/mit-license.php"
     }
-  ],
-  "homepage": "http://casperjs.org"
+  ]
 }
